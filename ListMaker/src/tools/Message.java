@@ -1,4 +1,4 @@
-package listmaker;
+package tools;
 
 import javax.swing.JOptionPane;
 

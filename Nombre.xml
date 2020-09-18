@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<rootnode>
+	<nombre>
+		<variante>JANET</variante>
+		<variante>JANETH</variante>
+		<variante>JANNETH</variante>
+		<variante>JANNET</variante>
+		<variante>JANNETTE</variante>
+		<variante>JANETTE</variante>
+	</nombre>
 
-<nombre>
-	<variante>Janet</variante>
-	<variante>Janeth</variante>
-	<variante>Janneth</variante>
-	<variante>Jannet</variante>
-	<variante>Jannete</variante>
-	<variante>Jannette</variante>
-</nombre>
-
-<nombre>
-	<variante>Emanuel</variante>
-	<variante>Emmanuel</variante>
-	<variante>Emmanuelle</variante>
-	<variante>Emanuellle</variante>
-</nombre>
+	<nombre>
+		<variante>EMANUEL</variante>
+		<variante>EMMANUEL</variante>
+		<variante>EMMANUELLE</variante>
+		<variante>EMANUELLE</variante>
+	</nombre>
+</rootnode>
