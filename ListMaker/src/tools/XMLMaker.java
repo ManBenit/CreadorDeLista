@@ -1,16 +1,12 @@
 package tools;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -55,7 +51,7 @@ public class XMLMaker{
         }
     }
     
-    public ArrayList getNodes(String nodeName){
+    public ArrayList<Node> getNodes(String nodeName){
         ArrayList<Node> nodeList= new ArrayList<>();
         
         NodeList lista= doc.getElementsByTagName(nodeName);
@@ -65,7 +61,7 @@ public class XMLMaker{
         return nodeList;
     }
     
-    //MEthos which gets a children list from a parent,
+    //Method which gets a children list from a parent,
     //flag fullNode is: true->get all node, false->get only text content
     //It means, arraylist is Node type or String type, so it'll be casted on user class
     public ArrayList<Object> getChildNodes(Node parentNode, boolean fullNode){
@@ -82,17 +78,25 @@ public class XMLMaker{
         return childrenNodeList;
     }
     
+    //Write a new file
     public void write(String fileName){
         try{
             //Se escribe el contenido del XML en un archivo
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
             DOMSource source = new DOMSource(doc);
             StreamResult result = new StreamResult(new File(pathToSave+fileName+".xml"));
             transformer.transform(source, result);
         }catch(TransformerException ex){
             new Message().showMessage(Message.ERROR, ex.toString());
         }
+    }
+    
+    //Write into existing file
+    public void load(){
         
     }
     

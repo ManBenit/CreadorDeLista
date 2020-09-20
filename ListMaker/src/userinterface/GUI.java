@@ -3,8 +3,10 @@ package userinterface;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.JFrame;
 import listmaker.NameAnalyzer;
+import tools.MyFile;
 
 public class GUI extends JFrame implements ActionListener{
 
@@ -21,6 +23,7 @@ public class GUI extends JFrame implements ActionListener{
         jScrollPane1 = new javax.swing.JScrollPane();
         areaListaPrevia = new javax.swing.JTextArea();
         btnCrear = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -30,6 +33,8 @@ public class GUI extends JFrame implements ActionListener{
 
         btnCrear.setText("Crear lista");
 
+        btnLimpiar.setText("Limpiar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -38,19 +43,23 @@ public class GUI extends JFrame implements ActionListener{
                 .addContainerGap()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(477, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(251, 251, 251)
+                .addComponent(btnLimpiar)
+                .addGap(61, 61, 61)
                 .addComponent(btnCrear)
-                .addGap(118, 118, 118))
+                .addContainerGap(218, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addComponent(btnCrear)
-                .addGap(19, 19, 19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLimpiar)
+                    .addComponent(btnCrear))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
@@ -64,6 +73,9 @@ public class GUI extends JFrame implements ActionListener{
             String[] array= areaListaPrevia.getText().split("\n");
             analizarLista(array);
         }
+        else if(pressed==btnLimpiar){
+            areaListaPrevia.setText("");
+        }
     }
     
     
@@ -71,11 +83,13 @@ public class GUI extends JFrame implements ActionListener{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaListaPrevia;
     private javax.swing.JButton btnCrear;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
     private void escuchadores(){
         btnCrear.addActionListener(this);
+        btnLimpiar.addActionListener(this);
     }
     
     private void analizarLista(String[] nombres){
@@ -84,7 +98,18 @@ public class GUI extends JFrame implements ActionListener{
         for(String nom: nombres)
             listaCorrecta.add(analizador.analyze(nom));
         
-        for(String s: listaCorrecta)
-            System.out.println(s);
+        Collections.sort(listaCorrecta);
+//        for(String s: listaCorrecta)
+//            System.out.println(s);
+        
+        String path= makePath("../ListaExportada.txt");
+        new MyFile().writeFile(path, listaCorrecta);
+    }
+    
+    private String makePath(String previousPath){
+        if(System.getProperty("os.name").equals("Windows"))
+            return previousPath.replaceAll("/", "\\");
+        else
+            return previousPath;
     }
 }

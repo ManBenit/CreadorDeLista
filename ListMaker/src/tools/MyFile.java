@@ -12,9 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -180,7 +178,9 @@ public class MyFile implements Serializable{
         ByteArrayOutputStream baos= new ByteArrayOutputStream();
         try{
             copyIO(new FileInputStream(file), baos);
-        }catch(IOException ex){new Message().showMessage(Message.ERROR, "Error returning FIS\n"+ex);}
+        }catch(IOException ex){
+            new Message().showMessage(Message.ERROR, "Error returning FIS\n"+ex);
+        }
         
         return baos.toByteArray();
     }

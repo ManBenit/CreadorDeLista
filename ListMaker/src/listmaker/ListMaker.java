@@ -22,7 +22,8 @@ public class ListMaker {
 //        xml.setDestinationPath("..");
 //        Element e= xml.createNode(null, "webos", null);
 //        xml.addAttribute(e, "valorXD", null);
-//        xml.createNode(e, "adentro", "sdfs");
+//        Element e2= xml.createNode(e, "adentro", null);
+//        xml.createNode(e2, "masadentro", "ertertert");
 //        xml.write("Prueba");
 
         
@@ -41,7 +42,7 @@ public class ListMaker {
         gui.setVisible(true);
         
 //        NameAnalyzer analizador= new NameAnalyzer();
-//        String g=analizador.analyze("emanuel HerNández Garcia");
+//        String g=analizador.analyze("MARco antonio Guerra CAsTellanos cholo");
 //        System.out.println(g);
         
         

@@ -31,10 +31,10 @@ public final class Dictionary {
     }
     
     private void getData(String dicNodeName){
-        //Get all 'nombre' nodes
+        //Get all 'nombre' or 'apellido' nodes
         ArrayList<Node> nodosNombre= dic.getNodes(dicNodeName);
         
-        //From each 'nombre' node, get 'variante' nodes and make the map
+        //From each 'nombre' or 'apellido' node, get 'variante' nodes and make the map
         for(Node n: nodosNombre)
             map.add(dic.getChildNodes(n, false)); //manejo en forma de String
     }
@@ -46,18 +46,22 @@ public final class Dictionary {
     
     public void addName(String name){
         XMLMaker xml= new XMLMaker();
-//        xml.setDestinationPath("..");
-//        Element e= xml.createNode(null, "nombre", null);
-//        xml.createNode(e, "variante", name);
-//        xml.write("NuevoNombre");
-
-        
+        xml.read(readFrom("Nombre.xml"));
+        Element rootNode= (Element)xml.getNodes("rootnode").get(0);
+        Element ap= xml.createNode(rootNode, "nombre", null);
+        xml.createNode(ap, "variante", name);
+        xml.setDestinationPath("..");
+        xml.write("Nombre");
     }
     
     public void addLastName(String lastName){
-//        Element e= dic.createNode("apellido", null);
-//        dic.read(readFrom("Apellido.xml"));
-//        dic.addChildNode(e, "variante", lastName);
+        XMLMaker xml= new XMLMaker();
+        xml.read(readFrom("Apellido.xml"));
+        Element rootNode= (Element)xml.getNodes("rootnode").get(0);
+        Element ap= xml.createNode(rootNode, "apellido", null);
+        xml.createNode(ap, "variante", lastName);
+        xml.setDestinationPath("..");
+        xml.write("Apellido");
     }
     
     private File readFrom(String name){

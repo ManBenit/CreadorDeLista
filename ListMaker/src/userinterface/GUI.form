@@ -28,10 +28,12 @@
               <Component id="jScrollPane1" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="477" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="251" max="-2" attributes="0"/>
+              <Component id="btnLimpiar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
               <Component id="btnCrear" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+              <EmptySpace pref="218" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -40,9 +42,12 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="233" max="-2" attributes="0"/>
-              <EmptySpace pref="45" max="32767" attributes="0"/>
-              <Component id="btnCrear" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnCrear" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="53" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -66,6 +71,11 @@
     <Component class="javax.swing.JButton" name="btnCrear">
       <Properties>
         <Property name="text" type="java.lang.String" value="Crear lista"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnLimpiar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Limpiar"/>
       </Properties>
     </Component>
   </SubComponents>

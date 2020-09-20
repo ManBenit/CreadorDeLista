@@ -20,10 +20,26 @@ public class Message{
         return JOptionPane.showInputDialog(null, message, title, type);
     }
     
+    //Show a ComboBox with options
     public String enterInfo(String message, Object[] options){
         Object ret= JOptionPane.showInputDialog(null, message, "Choose", JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         
         return ret.toString();
+    }
+    
+    /*Show a button for each element of options
+    If any option is selected, the aprt will be placed into Nombre.xml by default*/
+    public int enterInfoB(String message, Object[] options){
+        int s=0;
+        int seleccion = JOptionPane.showOptionDialog( null, message,
+            "Application says:",JOptionPane.UNDEFINED_CONDITION,
+            JOptionPane.QUESTION_MESSAGE,null,// null para icono por defecto.
+            options,null);
+
+        if (seleccion != -1)
+           s= seleccion;
+        
+        return s;
     }
     
     public int selectYesNo(String message){
@@ -38,5 +54,7 @@ public class Message{
         
         return s;
     }
+    
+    
     
 }
