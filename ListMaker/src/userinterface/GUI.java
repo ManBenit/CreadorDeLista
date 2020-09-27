@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.JFrame;
 import listmaker.NameAnalyzer;
+import tools.Message;
 import tools.MyFile;
 
 public class GUI extends JFrame implements ActionListener{
@@ -72,6 +73,7 @@ public class GUI extends JFrame implements ActionListener{
         if(pressed==btnCrear){
             String[] array= areaListaPrevia.getText().split("\n");
             analizarLista(array);
+            new Message().showMessage(Message.INFO, "Lista exportada");
         }
         else if(pressed==btnLimpiar){
             areaListaPrevia.setText("");

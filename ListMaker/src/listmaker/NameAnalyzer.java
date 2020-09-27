@@ -26,34 +26,33 @@ public class NameAnalyzer {
         String[] fnParts= fullName.split(" ");
         
         for(String namePart: fnParts){
-            boolean bndRev= false; //review flag because it'll be searched into both of dictionaries
+            boolean bndConfName= false; //review flag because it'll be searched into both of dictionaries
+            boolean bndConfLName= false;
             int nom_ap=0; //name or lastname: 1->name, 2->lastname
             
             //Name review
             for(ArrayList<Object> variantes: names){
                 if(variantes.contains(namePart.toUpperCase())){
-                    bndRev=true;
-                    nom_ap=1;
+                    bndConfName=true;
+                    //nom_ap=1;
                     break;
                 }
             }
             
             
             //Lastname review
-            if(!bndRev){
-                for(ArrayList<Object> variantes: lastNames){
-                    if(variantes.contains(namePart.toUpperCase())){
-                        bndRev=true;
-                        nom_ap=2;
-                        break;
-                    }
+            for(ArrayList<Object> variantes: lastNames){
+                if(variantes.contains(namePart.toUpperCase())){
+                    bndConfLName=true;
+                    //nom_ap=2;
+                    break;
                 }
             }
             
-            //If it has not been checked, add the element at file
-            if(!bndRev){
-                String[] opciones= {"Nombre", "Apellido"};
-                int tipo= new Message().enterInfoB(namePart.toUpperCase()+" es... ?", opciones);
+            
+            if(!bndConfName && !bndConfLName){
+                String[] opciones= {"Nombre", "Apellido", "Ambos"};
+                int tipo= new Message().enterInfoB(namePart.toUpperCase()+" es... ?", opciones, "Registro de nuevo elemento de nombre");
                 
                 if(tipo==0){
                     nom_ap=1;
@@ -65,6 +64,41 @@ public class NameAnalyzer {
                     Dictionary.getInstance().addLastName(namePart.toUpperCase());
                     reloadDictionary(opciones[tipo].toLowerCase());
                 }
+                else if(tipo==2){
+                    Dictionary.getInstance().addName(namePart.toUpperCase());
+                    reloadDictionary(opciones[tipo].toLowerCase());
+                    Dictionary.getInstance().addLastName(namePart.toUpperCase());
+                    reloadDictionary(opciones[tipo].toLowerCase());
+                    
+                    String[] partAs= {"Nombre", "Apellido"};
+                    int t= new Message().enterInfoB(
+                            "Y en "+fullName+", "+namePart.toUpperCase()+" es... ?", 
+                            partAs,
+                            "Función del elemento de nombre"
+                    );
+
+                    if(t==0)
+                        nom_ap=1;
+                    else
+                        nom_ap=2;
+                }
+            }
+            else if(!bndConfName && bndConfLName)
+                nom_ap=2;
+            else if(bndConfName && !bndConfLName)
+                nom_ap=1;
+            else if(bndConfName && bndConfLName){
+                String[] opciones= {"Nombre", "Apellido"};
+                int tipo= new Message().enterInfoB(
+                        "En "+fullName+", "+namePart.toUpperCase()+" es... ?", 
+                        opciones,
+                        "Función del elemento de nombre"
+                );
+                
+                if(tipo==0)
+                    nom_ap=1;
+                else
+                    nom_ap=2;
             }
             
             //Finnaly make the rigth name form

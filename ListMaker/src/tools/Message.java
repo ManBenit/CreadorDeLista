@@ -29,10 +29,13 @@ public class Message{
     
     /*Show a button for each element of options
     If any option is selected, the aprt will be placed into Nombre.xml by default*/
-    public int enterInfoB(String message, Object[] options){
+    public int enterInfoB(String message, Object[] options, String title){
+        String tit="";
+        if(title==null) tit="Application says:";
+        else tit=title;
         int s=0;
         int seleccion = JOptionPane.showOptionDialog( null, message,
-            "Application says:",JOptionPane.UNDEFINED_CONDITION,
+            tit,JOptionPane.UNDEFINED_CONDITION,
             JOptionPane.QUESTION_MESSAGE,null,// null para icono por defecto.
             options,null);
 
